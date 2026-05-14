@@ -58,7 +58,7 @@ export default function MissionControlPage() {
     <>
       <section className="mt-8 mb-16 relative">
         <div className="max-w-2xl">
-          <h1 className="text-[64px] font-serif font-bold tracking-tight leading-[1.05] text-[#3D352E] mb-6">
+          <h1 className="text-[64px] font-serif-warm tracking-tight leading-[1.05] text-[#3D352E] mb-6">
             Discover Your Next{" "}
             <span className="italic text-[#FF7A3D] block">Venture Launch.</span>
           </h1>
@@ -73,15 +73,15 @@ export default function MissionControlPage() {
           className="absolute right-10 top-0 hidden xl:flex flex-col items-center"
           style={{
             position: "absolute",
-            inset: "-9px auto auto 477px",
-            width: 237,
-            height: 230,
+            inset: "-35px auto auto 630px",
+            width: 420,
+            height: 353,
           }}
         >
           <div className="relative rocket-launch">
             <Icon
               icon="ph:rocket-duotone"
-              className="text-[180px] text-[#FF7A3D] -rotate-45"
+              className="text-[280px] text-[#FF7A3D] -rotate-45"
             />
             <div
               className="absolute -bottom-4 -left-4 w-12 h-12 bg-[#D4A574]/20 rounded-full smoke-trail"
@@ -99,7 +99,7 @@ export default function MissionControlPage() {
         </div>
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-10">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {STARTUPS.map((s) => (
           <StartupCard key={s.startupName} {...s} />
         ))}

@@ -90,7 +90,7 @@ export function Sidebar({
         <div className="w-10 h-10 bg-[#FF7A3D] rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/10 rotate-3">
           <Icon icon="ph:rocket-launch-duotone" className="text-white text-2xl" />
         </div>
-        <span className="text-2xl font-bold tracking-tight text-[#3D352E] font-serif">
+        <span className="text-2xl font-bold tracking-tight text-[#3D352E] font-serif-warm">
           Launchpad
         </span>
       </div>

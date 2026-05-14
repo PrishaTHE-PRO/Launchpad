@@ -43,21 +43,21 @@ export function RightSidebar() {
           </div>
         </div>
 
-        <div className="space-y-4 overflow-y-auto max-h-[280px] custom-scroll pr-2">
-          <div className="p-5 bg-white border-2 border-[#3D352E] rounded-[24px] shadow-[4px_4px_0px_#3D352E] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_#3D352E] transition-all cursor-default group">
-            <p className="text-[13px] font-medium text-[#3D352E] leading-relaxed italic">
-              &ldquo;Aether&rsquo;s launch trajectory is solid. The founders
-              have significant flight time in deep tech.&rdquo;
-            </p>
-            <div className="mt-4 flex items-center justify-between">
-              <span className="text-[10px] font-bold text-[#B0A8A0] uppercase tracking-tighter">
-                14 AUG • 09:42
-              </span>
-              <Icon
-                icon="ph:rocket-duotone"
-                className="text-[#FF7A3D] opacity-0 group-hover:opacity-100 transition-opacity"
-              />
-            </div>
+        <div className="space-y-4 overflow-y-auto max-h-[280px] custom-scroll pr-2 mb-6" />
+
+        <div className="p-5 bg-white border-2 border-[#3D352E] rounded-[24px] shadow-[4px_4px_0px_#3D352E] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_#3D352E] transition-all cursor-default group">
+          <p className="text-[13px] font-medium text-[#3D352E] leading-relaxed italic">
+            &ldquo;Aether&rsquo;s launch trajectory is solid. The founders have
+            significant flight time in deep tech.&rdquo;
+          </p>
+          <div className="mt-4 flex items-center justify-between">
+            <span className="text-[10px] font-bold text-[#B0A8A0] uppercase tracking-tighter">
+              14 AUG • 09:42
+            </span>
+            <Icon
+              icon="ph:rocket-duotone"
+              className="text-[#FF7A3D] opacity-0 group-hover:opacity-100 transition-opacity"
+            />
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@ export function RightSidebar() {
               className="text-3xl text-[#D4A574]"
             />
           </div>
-          <p className="text-[14px] font-serif font-bold text-[#3D352E] mb-2">
+          <p className="text-[14px] font-serif-warm text-[#3D352E] mb-2">
             Scan Target
           </p>
           <p className="text-[11px] font-medium text-[#8E847B] leading-relaxed italic">

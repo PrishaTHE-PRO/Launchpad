@@ -83,7 +83,7 @@ export function StartupCard({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-xl font-serif font-bold text-[#3D352E] leading-tight">
+              <h3 className="text-xl font-serif-warm text-[#3D352E] leading-tight">
                 {startupName}
               </h3>
               {isGrowing && (
