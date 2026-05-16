@@ -58,11 +58,11 @@ export default function MissionControlPage() {
     <>
       <section className="mt-8 mb-16 relative">
         <div className="max-w-2xl">
-          <h1 className="text-[64px] font-serif-warm tracking-tight leading-[1.05] text-[#3D352E] mb-6">
+          <h1 className="text-[64px] font-serif-warm tracking-tight leading-[1.05] text-[var(--text-dark)] mb-6">
             Discover Your Next{" "}
             <span className="italic text-[#FF7A3D] block">Venture Launch.</span>
           </h1>
-          <p className="text-[#8E847B] text-[18px] font-medium max-w-lg mb-4">
+          <p className="text-[var(--text-muted)] text-[18px] font-medium max-w-lg mb-4">
             Tracking 142 star-bound startups. Curated insights sketched for the
             boldest explorers.
           </p>

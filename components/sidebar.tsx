@@ -60,12 +60,12 @@ export interface SidebarProps {
 function sectorClass(state: Sector["state"]) {
   switch (state) {
     case "selected":
-      return "border-[#3D352E]/30 bg-[#FF7A3D]/10 text-[#FF7A3D] hover:border-[#3D352E]";
+      return "border-[#FF7A3D]/30 bg-[#FF7A3D]/10 text-[#FF7A3D] hover:border-[var(--border-heavy)]";
     case "muted":
-      return "border-[#EAE6E1] bg-white text-[#8E847B] hover:border-[#3D352E] hover:text-[#3D352E]";
+      return "border-[var(--border-color)] bg-[var(--card-white)] text-[var(--text-muted)] hover:border-[var(--border-heavy)] hover:text-[var(--text-dark)]";
     case "active":
     default:
-      return "border-[#3D352E] bg-white text-[#3D352E] hover:bg-[#FF7A3D] hover:text-white";
+      return "border-[var(--border-heavy)] bg-[var(--card-white)] text-[var(--text-dark)] hover:bg-[#FF7A3D] hover:text-white";
   }
 }
 
@@ -85,12 +85,12 @@ export function Sidebar({
   const active = activeNav ?? navKeyFromPath(pathname);
 
   return (
-    <aside className="w-64 h-full flex-shrink-0 flex flex-col border-r border-[#EAE6E1] bg-[#F9F8F6] z-50">
+    <aside className="w-64 h-full flex-shrink-0 flex flex-col border-r border-[var(--border-color)] bg-[var(--sidebar-bg)] z-50">
       <div className="p-10 flex items-center gap-3">
         <div className="w-10 h-10 bg-[#FF7A3D] rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/10 rotate-3">
           <Icon icon="ph:rocket-launch-duotone" className="text-white text-2xl" />
         </div>
-        <span className="text-2xl font-bold tracking-tight text-[#3D352E] font-serif-warm">
+        <span className="text-2xl font-bold tracking-tight text-[var(--text-dark)] font-serif-warm">
           Launchpad
         </span>
       </div>
@@ -106,8 +106,8 @@ export function Sidebar({
                 className={
                   "flex items-center gap-4 px-4 py-3 text-[15px] rounded-2xl border-2 transition-all group " +
                   (isActive
-                    ? "font-bold text-[#FF7A3D] bg-white border-[#3D352E] shadow-sm"
-                    : "font-medium text-[#8E847B] border-transparent hover:text-[#3D352E] hover:bg-white")
+                    ? "font-bold text-[#FF7A3D] bg-[var(--card-white)] border-[var(--border-heavy)] shadow-sm"
+                    : "font-medium text-[var(--text-muted)] border-transparent hover:text-[var(--text-dark)] hover:bg-[var(--card-white)]")
                 }
               >
                 <Icon
@@ -127,7 +127,7 @@ export function Sidebar({
           </h3>
           <div className="px-4 space-y-8">
             <div className="space-y-4">
-              <label className="text-[13px] font-bold text-[#8E847B] flex items-center justify-between">
+              <label className="text-[13px] font-bold text-[var(--text-muted)] flex items-center justify-between">
                 Sectors
                 <Icon icon="ph:caret-right-bold" className="text-[#B0A8A0]" />
               </label>
@@ -152,7 +152,7 @@ export function Sidebar({
       </nav>
 
       <div className="p-8 mt-auto">
-        <div className="p-5 rounded-[24px] bg-white border-2 border-[#3D352E] shadow-[6px_6px_0px_#3D352E] rotate-1">
+        <div className="p-5 rounded-[24px] bg-[var(--card-white)] border-2 border-[var(--border-heavy)] shadow-[6px_6px_0px_var(--shadow-hard)] rotate-1">
           <div className="flex items-center justify-between mb-3">
             <Icon
               icon="ph:rocket-launch-duotone"
@@ -160,8 +160,8 @@ export function Sidebar({
             />
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
           </div>
-          <p className="text-[13px] font-bold text-[#3D352E]">Engines Ready</p>
-          <p className="text-[11px] font-medium text-[#8E847B] mt-0.5">
+          <p className="text-[13px] font-bold text-[var(--text-dark)]">Engines Ready</p>
+          <p className="text-[11px] font-medium text-[var(--text-muted)] mt-0.5">
             Clear skies for takeoff.
           </p>
         </div>

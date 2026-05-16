@@ -60,7 +60,7 @@ export function StartupCard({
   const stageClass =
     stageVariant === "warm"
       ? "badge-warm"
-      : "bg-[#EAE6E1] text-[#8E847B] border-2 border-[#3D352E]/10";
+      : "bg-[var(--border-color)] text-[var(--text-muted)] border-2 border-[var(--border-heavy)]/10";
 
   return (
     <Link
@@ -78,12 +78,12 @@ export function StartupCard({
 
       <div className="flex justify-between items-start mb-8 relative">
         <div className="flex gap-5 items-center">
-          <div className="w-14 h-14 rounded-2xl bg-white border-2 border-[#3D352E] p-3 flex items-center justify-center shadow-[4px_4px_0px_#3D352E]">
+          <div className="w-14 h-14 rounded-2xl bg-[var(--card-white)] border-2 border-[var(--border-heavy)] p-3 flex items-center justify-center shadow-[4px_4px_0px_var(--shadow-hard)]">
             <Icon icon={cardIcon} className={`text-3xl ${iconColor}`} />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-xl font-serif-warm text-[#3D352E] leading-tight">
+              <h3 className="text-xl font-serif-warm text-[var(--text-dark)] leading-tight">
                 {startupName}
               </h3>
               {isGrowing && (
@@ -107,7 +107,7 @@ export function StartupCard({
         </div>
       </div>
 
-      <p className="text-[#8E847B] text-[15px] leading-relaxed mb-10 font-medium relative">
+      <p className="text-[var(--text-muted)] text-[15px] leading-relaxed mb-10 font-medium relative">
         {description}
       </p>
 
@@ -115,17 +115,17 @@ export function StartupCard({
         {tags.map((tag) => (
           <span
             key={tag}
-            className="px-3 py-1.5 rounded-xl border-2 border-[#3D352E] bg-white text-[11px] font-bold text-[#3D352E] hover:bg-[#F9F8F6] transition-all"
+            className="px-3 py-1.5 rounded-xl border-2 border-[var(--border-heavy)] bg-[var(--card-white)] text-[11px] font-bold text-[var(--text-dark)] hover:bg-[var(--sidebar-bg)] transition-all"
           >
             {tag}
           </span>
         ))}
       </div>
 
-      <div className="flex items-center justify-between border-t-2 border-[#F9F8F6] pt-6 mt-auto relative">
+      <div className="flex items-center justify-between border-t-2 border-[var(--sidebar-bg)] pt-6 mt-auto relative">
         <div className="flex items-center gap-3">
           <Icon icon={statusIcon} className={a.statusIconColor} />
-          <span className="text-[12px] font-bold text-[#3D352E]">
+          <span className="text-[12px] font-bold text-[var(--text-dark)]">
             {statusText}
           </span>
         </div>
