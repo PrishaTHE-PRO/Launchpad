@@ -1,112 +1,57 @@
 import { Icon } from "@iconify/react";
-import { StartupCard, type StartupCardProps } from "@/components/startup-card";
+import { StartupCard } from "@/components/startup-card";
+import { getRecentStartups } from "@/lib/yc-api";
 
-const STARTUPS: StartupCardProps[] = [
-  {
-    startupName: "Aether Intelligence",
-    fundingStage: "Series A",
-    fundingAmount: "$12.5M EQUITY",
-    description:
-      "Sketching the future of industrial design with spatial AI modules for the next generation of engineers.",
-    tags: ["GenAI", "Spatial Tech"],
-    statusText: "High Momentum",
-    statusIcon: "ph:fire-duotone",
-    timeAgo: "4m ago",
-    cardIcon: "ph:cloud-lightning-duotone",
-    iconColor: "text-[#5D83FF]",
-    isGrowing: true,
-    accent: "orange",
-    stageVariant: "warm",
-    href: "/draft/startups/aether-intelligence",
-  },
-  {
-    startupName: "Fortress Protocol",
-    fundingStage: "Seed",
-    fundingAmount: "$2.4M EQUITY",
-    description:
-      "Hand-crafted security auditing for decentralized stacks. Built for the modern orbital economy.",
-    tags: ["Cybersec", "Web3"],
-    statusText: "Safe Orbit",
-    statusIcon: "ph:planet-fill",
-    timeAgo: "12m ago",
-    cardIcon: "ph:shield-chevron-duotone",
-    iconColor: "text-[#A8B5A3]",
-    isGrowing: false,
-    accent: "green",
-    stageVariant: "warm",
-  },
-  {
-    startupName: "Zephyr Labs",
-    fundingStage: "Pre-Seed",
-    fundingAmount: "$800K EQUITY",
-    description:
-      "Sketching the blueprint for modular carbon capture. Zero emissions, high altitude thinking.",
-    tags: ["ClimateTech", "BioTech"],
-    statusText: "Trending Up",
-    statusIcon: "ph:star-duotone",
-    timeAgo: "1h ago",
-    cardIcon: "ph:wind-duotone",
-    iconColor: "text-blue-300",
-    isGrowing: true,
-    accent: "gold",
-    stageVariant: "muted",
-  },
-];
+export const dynamic = "force-dynamic";
 
-export default function MissionControlPage() {
+export default async function HotStartupsPage() {
+  let startups: Awaited<ReturnType<typeof getRecentStartups>> = [];
+  let error: string | null = null;
+
+  try {
+    startups = await getRecentStartups({ limit: 24, hiringOnly: false });
+  } catch (e) {
+    error = e instanceof Error ? e.message : "Failed to load startups";
+  }
+
+  const hiringCount = startups.filter((s) => s.isHiring).length;
+
   return (
     <>
       <section className="mt-8 mb-16 relative">
         <div className="max-w-2xl">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="px-3 py-1 rounded-full badge-warm text-[11px] font-black uppercase tracking-wider">
+              Live from YC
+            </span>
+            <span className="text-[12px] font-bold text-[var(--text-muted)]">
+              yc-oss.github.io/api · updated daily
+            </span>
+          </div>
           <h1 className="text-[64px] font-serif-warm tracking-tight leading-[1.05] text-[var(--text-dark)] mb-6">
-            Discover Your Next{" "}
-            <span className="italic text-[#FF7A3D] block">Venture Launch.</span>
+            Explore the Hottest{" "}
+            <span className="italic text-[#FF7A3D] block">Tech Startups.</span>
           </h1>
           <p className="text-[var(--text-muted)] text-[18px] font-medium max-w-lg mb-4">
-            Tracking 142 star-bound startups. Curated insights sketched for the
-            boldest explorers.
+            {startups.length} recent Y Combinator companies · {hiringCount} actively hiring.
+            Real data on what they do, their sector, and team size.
           </p>
           <div className="sketch-line opacity-30" />
         </div>
-
-        <div
-          className="absolute right-10 top-0 hidden xl:flex flex-col items-center"
-          style={{
-            position: "absolute",
-            inset: "-35px auto auto 630px",
-            width: 420,
-            height: 353,
-          }}
-        >
-          <div className="relative rocket-launch">
-            <Icon
-              icon="ph:rocket-duotone"
-              className="text-[280px] text-[#FF7A3D] -rotate-45"
-            />
-            <div
-              className="absolute -bottom-4 -left-4 w-12 h-12 bg-[#D4A574]/20 rounded-full smoke-trail"
-              style={{ animationDelay: "0.1s" }}
-            />
-            <div
-              className="absolute -bottom-10 left-2 w-16 h-16 bg-[#D4A574]/15 rounded-full smoke-trail"
-              style={{ animationDelay: "0.5s" }}
-            />
-            <div
-              className="absolute -bottom-6 left-12 w-10 h-10 bg-[#D4A574]/10 rounded-full smoke-trail"
-              style={{ animationDelay: "0.3s" }}
-            />
-          </div>
-        </div>
       </section>
+
+      {error && (
+        <div className="card-human p-8 mb-8 border-red-200">
+          <p className="font-bold text-red-600 mb-2">Could not reach YC API</p>
+          <p className="text-[14px] text-[var(--text-muted)]">{error}</p>
+        </div>
+      )}
 
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {STARTUPS.map((s) => (
-          <StartupCard key={s.startupName} {...s} />
+        {startups.map((startup, i) => (
+          <StartupCard key={startup.slug} startup={startup} index={i} />
         ))}
       </section>
-
-      <div className="fixed bottom-[-5%] right-[-5%] w-[500px] h-[500px] bg-[#FF7A3D]/5 blur-[120px] rounded-full -z-10" />
-      <div className="fixed top-[20%] left-[20%] w-[400px] h-[400px] bg-[#A8B5A3]/5 blur-[100px] rounded-full -z-10" />
     </>
   );
 }

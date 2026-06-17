@@ -47,7 +47,7 @@ export function TopHeader({
           <input
             ref={inputRef}
             type="text"
-            placeholder="Search for the next lunar mission..."
+            placeholder="Search startups, roles, or IPO news..."
             className="w-full bg-[var(--input-bg)] border-2 border-[var(--border-heavy)] rounded-[24px] pl-14 pr-16 py-3.5 text-[15px] text-[var(--text-dark)] focus:outline-none focus:border-[#FF7A3D] transition-all shadow-sm placeholder:text-[#B0A8A0]"
             onChange={(e) => onSearch?.(e.target.value)}
             onKeyDown={(e) => {
@@ -78,7 +78,7 @@ export function TopHeader({
             icon="ph:rocket-duotone"
             className="text-lg group-hover:animate-bounce"
           />
-          Launch Intel
+          Analyze Role
         </button>
         <button
           type="button"

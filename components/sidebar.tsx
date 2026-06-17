@@ -4,7 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 
-type NavKey = "home" | "charts" | "watchlist" | "orbit";
+const SECTORS = [
+  { label: "All", state: "selected" as const },
+  { label: "B2B", state: "active" as const },
+  { label: "AI / ML", state: "muted" as const },
+  { label: "Fintech", state: "muted" as const },
+  { label: "Healthcare", state: "muted" as const },
+];
+
+type NavKey = "startups" | "ipo" | "career" | "targets";
 
 const NAV_ITEMS: {
   key: NavKey;
@@ -14,50 +22,41 @@ const NAV_ITEMS: {
   hoverIconClass: string;
 }[] = [
   {
-    key: "home",
+    key: "startups",
     href: "/draft/mission-control",
-    label: "Mission Control",
-    icon: "ph:rocket-duotone",
+    label: "Hot Startups",
+    icon: "ph:fire-duotone",
     hoverIconClass: "group-hover:text-[#FF7A3D]",
   },
   {
-    key: "charts",
+    key: "ipo",
     href: "/draft/star-charts",
-    label: "Star Charts",
-    icon: "ph:telescope-duotone",
+    label: "IPO News",
+    icon: "ph:newspaper-duotone",
     hoverIconClass: "group-hover:text-[#FF7A3D]",
   },
   {
-    key: "watchlist",
-    href: "/draft/watchlist",
-    label: "Watchlist",
-    icon: "ph:shooting-star-duotone",
-    hoverIconClass: "group-hover:text-yellow-500",
-  },
-  {
-    key: "orbit",
-    href: "/draft/orbit",
-    label: "Orbit",
-    icon: "ph:planet-duotone",
+    key: "career",
+    href: "/draft/career-planner",
+    label: "Career Planner",
+    icon: "ph:compass-duotone",
     hoverIconClass: "group-hover:text-[#A8B5A3]",
   },
-];
-
-type Sector = { label: string; state: "active" | "selected" | "muted" };
-
-const DEFAULT_SECTORS: Sector[] = [
-  { label: "Fintech", state: "active" },
-  { label: "AI / ML", state: "selected" },
-  { label: "SaaS", state: "muted" },
+  {
+    key: "targets",
+    href: "/draft/watchlist",
+    label: "My Targets",
+    icon: "ph:target-duotone",
+    hoverIconClass: "group-hover:text-yellow-500",
+  },
 ];
 
 export interface SidebarProps {
   activeNav?: NavKey;
-  sectors?: Sector[];
   onFilterSelect?: (sector: string) => void;
 }
 
-function sectorClass(state: Sector["state"]) {
+function sectorClass(state: "active" | "selected" | "muted") {
   switch (state) {
     case "selected":
       return "border-[#FF7A3D]/30 bg-[#FF7A3D]/10 text-[#FF7A3D] hover:border-[var(--border-heavy)]";
@@ -70,17 +69,13 @@ function sectorClass(state: Sector["state"]) {
 }
 
 function navKeyFromPath(pathname: string): NavKey {
-  if (pathname.startsWith("/draft/star-charts")) return "charts";
-  if (pathname.startsWith("/draft/watchlist")) return "watchlist";
-  if (pathname.startsWith("/draft/orbit")) return "orbit";
-  return "home";
+  if (pathname.startsWith("/draft/star-charts")) return "ipo";
+  if (pathname.startsWith("/draft/career-planner")) return "career";
+  if (pathname.startsWith("/draft/watchlist")) return "targets";
+  return "startups";
 }
 
-export function Sidebar({
-  activeNav,
-  sectors = DEFAULT_SECTORS,
-  onFilterSelect,
-}: SidebarProps) {
+export function Sidebar({ activeNav, onFilterSelect }: SidebarProps) {
   const pathname = usePathname();
   const active = activeNav ?? navKeyFromPath(pathname);
 
@@ -122,17 +117,13 @@ export function Sidebar({
 
         <div className="pt-8">
           <h3 className="px-4 text-[11px] font-black uppercase tracking-[0.2em] text-[#B0A8A0] mb-6 flex items-center gap-2">
-            <Icon icon="ph:pencil-circle-duotone" />
-            Flight filters
+            <Icon icon="ph:funnel-duotone" />
+            Filter by sector
           </h3>
           <div className="px-4 space-y-8">
             <div className="space-y-4">
-              <label className="text-[13px] font-bold text-[var(--text-muted)] flex items-center justify-between">
-                Sectors
-                <Icon icon="ph:caret-right-bold" className="text-[#B0A8A0]" />
-              </label>
               <div className="flex flex-wrap gap-2">
-                {sectors.map((s) => (
+                {SECTORS.map((s) => (
                   <button
                     key={s.label}
                     type="button"
@@ -152,19 +143,19 @@ export function Sidebar({
       </nav>
 
       <div className="p-8 mt-auto">
-        <div className="p-5 rounded-[24px] bg-[var(--card-white)] border-2 border-[var(--border-heavy)] shadow-[6px_6px_0px_var(--shadow-hard)] rotate-1">
+        <Link
+          href="/draft/career-planner"
+          className="block p-5 rounded-[24px] bg-[var(--card-white)] border-2 border-[var(--border-heavy)] shadow-[6px_6px_0px_var(--shadow-hard)] rotate-1 hover:translate-y-[-2px] transition-all"
+        >
           <div className="flex items-center justify-between mb-3">
-            <Icon
-              icon="ph:rocket-launch-duotone"
-              className="text-2xl text-[#FF7A3D] rocket-mini"
-            />
+            <Icon icon="ph:compass-duotone" className="text-2xl text-[#FF7A3D]" />
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
           </div>
-          <p className="text-[13px] font-bold text-[var(--text-dark)]">Engines Ready</p>
+          <p className="text-[13px] font-bold text-[var(--text-dark)]">Plan your path</p>
           <p className="text-[11px] font-medium text-[var(--text-muted)] mt-0.5">
-            Clear skies for takeoff.
+            Pick a role, see what to learn.
           </p>
-        </div>
+        </Link>
       </div>
     </aside>
   );
